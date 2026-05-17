@@ -4,7 +4,7 @@
 
 class BoolFilter {
  public:
-  // required_stable_samples sets how many consecutive equal inputs are needed
+  // required_stable_samples sets how many consecutive identical inputs are needed
   // before the filtered output changes. A value of 0 is treated as 1.
   explicit BoolFilter(std::size_t required_stable_samples = 1)
       : required_stable_samples_(required_stable_samples == 0 ? 1 : required_stable_samples) {}
