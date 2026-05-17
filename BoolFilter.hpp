@@ -2,10 +2,12 @@
 
 #include <cstddef>
 
+// BoolFilter debounces boolean input by requiring stable repeated samples
+// before changing the output state.
 class BoolFilter {
  public:
   // required_stable_samples sets how many consecutive identical inputs are needed
-  // before the filtered output changes. A value of 0 is treated as 1.
+  // before the filtered output changes. A value of 0 is clamped to 1.
   explicit BoolFilter(std::size_t required_stable_samples = 1)
       : required_stable_samples_(required_stable_samples == 0 ? 1 : required_stable_samples) {}
 
