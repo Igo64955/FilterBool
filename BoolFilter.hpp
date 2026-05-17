@@ -29,23 +29,21 @@ public:
 
     // Push a new sample into the ring buffer.
     void setWert(int wert) {
-        if (filterPos >= SIZE - 1) {
+        if (++filterPos >= SIZE) {
             filterPos = 0;
-        } else {
-            filterPos++;
         }
         buf[filterPos] = wert;
     }
 
-    // Return the averaged boolean value.
-    // Returns true  when the mean of the buffer is < 0.5  (signal mostly LOW).
-    // Returns false when the mean of the buffer is >= 0.5 (signal mostly HIGH).
+    // Return the averaged boolean value (inverted).
+    // Returns true  when the buffer mean < 0.5  (signal mostly LOW / button pressed).
+    // Returns false when the buffer mean >= 0.5 (signal mostly HIGH / button released).
     bool getWert() const {
         float summe = 0.0f;
         for (int i = 0; i < SIZE; i++) {
             summe += static_cast<float>(buf[i]);
         }
-        return !((summe / SIZE) >= 0.5f);
+        return (summe / SIZE) < 0.5f;
     }
 
 private:

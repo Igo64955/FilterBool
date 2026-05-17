@@ -9,7 +9,7 @@ Header-only C++ moving-average debounce filter for digital (boolean) signals.
 | `BoolFilter()` | Default constructor. Ring buffer zeroed. |
 | `void setup(int initialValue)` | Fill the entire ring buffer with `initialValue` (call once on startup). |
 | `void setWert(int wert)` | Push a new sample (0 or 1) into the ring buffer. |
-| `bool getWert()` | Returns `true` when the buffer mean < 0.5 (signal mostly LOW), `false` otherwise. |
+| `bool getWert()` | Returns `true` when the buffer mean < 0.5 (inverted: signal mostly LOW/pressed), `false` when mostly HIGH/released. |
 
 The template parameter `SIZE` (default **15**) controls the ring-buffer depth.
 
